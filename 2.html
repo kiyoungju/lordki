@@ -4,19 +4,12 @@
  <title>html-CSS</title>
  <meta charset="utf-8">
  <link rel="stylesheet" href="style.css">
- <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137651766-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-137651766-1');
-</script>
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+ <script src="colors.js"></script>
 </head>
 <body>
 <h1><a href="index.html">WEB</a></h1>
+
 <div id="grid">
   <ol>
     <li><a href="1.html">html</a></li>
@@ -31,5 +24,8 @@
       title="wikipedia">Wikipeda</a>
     </div>
 </div>
+<input type="button" value="night" onclick="
+  nightDayHandler(this);
+">
 </body>
 </html>
