@@ -1,16 +1,17 @@
 #!python
 print("content-type: text/html; charset=utf-8\n")
 print()
-import cgi, os
+import cgi, os, view#, html_sanitizer
+#sanitizer=html_sanitizer.Sanitizer()
 
-files=os.listdir('data')
-listStr=''
-for item in files:
-    listStr=listStr + '<li><a href="index.py?id={name}">{name}</a></li>'.format(name=item)
 form=cgi.FieldStorage()
 if 'id' in form:
-    pageId=form["id"].value
+    title=pageId=form["id"].value
     description=open('data/'+pageId,'r').read()
+    description=description.replace('<','&lt;')
+    description=description.replace('>','&gt;')
+    #description=sanitizer.sanitize(description)
+    #title=sanitizer.sanitize(title)
     update_link='<a href="update.py?id={}">update</a>'.format(pageId)
     delete_action='''
         <form action="process_delete.py" method="post">
@@ -19,7 +20,7 @@ if 'id' in form:
         </form>
     '''.format(pageId)
 else:
-    pageId='Welcome'
+    title=pageId='Welcome'
     description='Hello, web'
     update_link=''
     delete_action=''
@@ -41,4 +42,8 @@ print('''<!doctype html>
     <p>{desc}</p>
     </body>
 </html>
-'''.format(title=pageId, desc=description, listStr=listStr, update_link=update_link, delete_action=delete_action))
+'''.format(title=title,
+    desc=description,
+    listStr=view.getList(),
+    update_link=update_link,
+    delete_action=delete_action))
